@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB0EADE91BFE599500DBEE8F /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EADE81BFE599500DBEE8F /* IssueCell.swift */; settings = {ASSET_TAGS = (); }; };
 		FBB8A5391BED62E000023A62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8A5381BED62E000023A62 /* AppDelegate.swift */; };
-		FBB8A53B1BED62E000023A62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8A53A1BED62E000023A62 /* ViewController.swift */; };
+		FBB8A53B1BED62E000023A62 /* IssueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8A53A1BED62E000023A62 /* IssueController.swift */; };
 		FBB8A53E1BED62E000023A62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB8A53C1BED62E000023A62 /* Main.storyboard */; };
 		FBB8A5411BED62E000023A62 /* SilverQuill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBB8A53F1BED62E000023A62 /* SilverQuill.xcdatamodeld */; };
 		FBB8A5431BED62E000023A62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBB8A5421BED62E000023A62 /* Assets.xcassets */; };
@@ -35,9 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FB0EADE81BFE599500DBEE8F /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		FBB8A5351BED62E000023A62 /* SilverQuill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SilverQuill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBB8A5381BED62E000023A62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FBB8A53A1BED62E000023A62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FBB8A53A1BED62E000023A62 /* IssueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueController.swift; sourceTree = "<group>"; };
 		FBB8A53D1BED62E000023A62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FBB8A5401BED62E000023A62 /* SilverQuill.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SilverQuill.xcdatamodel; sourceTree = "<group>"; };
 		FBB8A5421BED62E000023A62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,8 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				FBB8A5381BED62E000023A62 /* AppDelegate.swift */,
-				FBB8A53A1BED62E000023A62 /* ViewController.swift */,
+				FBB8A53A1BED62E000023A62 /* IssueController.swift */,
 				FBB8A53C1BED62E000023A62 /* Main.storyboard */,
+				FB0EADE81BFE599500DBEE8F /* IssueCell.swift */,
 				FBB8A5421BED62E000023A62 /* Assets.xcassets */,
 				FBB8A5441BED62E000023A62 /* LaunchScreen.storyboard */,
 				FBB8A5471BED62E000023A62 /* Info.plist */,
@@ -259,8 +262,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBB8A5411BED62E000023A62 /* SilverQuill.xcdatamodeld in Sources */,
-				FBB8A53B1BED62E000023A62 /* ViewController.swift in Sources */,
+				FBB8A53B1BED62E000023A62 /* IssueController.swift in Sources */,
 				FBB8A5391BED62E000023A62 /* AppDelegate.swift in Sources */,
+				FB0EADE91BFE599500DBEE8F /* IssueCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +493,7 @@
 				FBB8A5621BED62E000023A62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FBB8A5631BED62E000023A62 /* Build configuration list for PBXNativeTarget "SilverQuillTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +502,7 @@
 				FBB8A5651BED62E000023A62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FBB8A5661BED62E000023A62 /* Build configuration list for PBXNativeTarget "SilverQuillUITests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +511,7 @@
 				FBB8A5681BED62E000023A62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
