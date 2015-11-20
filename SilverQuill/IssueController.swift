@@ -10,6 +10,8 @@ import UIKit
 
 class IssueController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    // MARK: Properties
+    
     var issues: [String] = ["Aurora","Rhapsody","Abstraction","Ink Track"]
     var years: [Int] = [2013,2012,2011,2010]
     
@@ -19,7 +21,7 @@ class IssueController: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "issue")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "IssueCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,8 +34,8 @@ class IssueController: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("issue")! as UITableViewCell
-        cell.textLabel?.text = self.issues[indexPath.row]
+        let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("IssueCell") as! IssueCell
+        cell
         return cell
     }
     
