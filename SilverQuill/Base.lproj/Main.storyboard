@@ -8,13 +8,13 @@
         <!--Issue List-->
         <scene sceneID="f0f-zZ-xAe">
             <objects>
-                <tableViewController title="Issue List" id="mqQ-EG-A57" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Lb-0B-vgK">
+                <tableViewController title="Issue List" id="mqQ-EG-A57" customClass="IssueTableViewController" customModule="SilverQuill" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Lb-0B-vgK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IssueCell" rowHeight="101" id="sVd-6r-5J4" customClass="IssueCell" customModule="SilverQuill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IssueTableViewCell" rowHeight="101" id="sVd-6r-5J4" customClass="IssueTableViewCell" customModule="SilverQuill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="101"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sVd-6r-5J4" id="gTt-5v-8hW">
@@ -25,7 +25,7 @@
                                             <rect key="frame" x="40" y="9" width="55" height="82"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-AI-sFH">
-                                            <rect key="frame" x="135" y="48" width="36" height="21"/>
+                                            <rect key="frame" x="135" y="48" width="256" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                                             <state key="normal" title="Download"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8X1-Xi-fjf">
-                                            <rect key="frame" x="135" y="19" width="34" height="21"/>
+                                            <rect key="frame" x="135" y="19" width="256" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -43,9 +43,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cover" destination="XNE-qG-zmu" id="UVl-iE-cbW"/>
-                                    <outlet property="date" destination="XOF-AI-sFH" id="U6c-zs-mJ7"/>
-                                    <outlet property="title" destination="8X1-Xi-fjf" id="VLa-6m-vTX"/>
+                                    <outlet property="cover" destination="XNE-qG-zmu" id="xqA-1j-reA"/>
+                                    <outlet property="date" destination="XOF-AI-sFH" id="V0m-Gy-9La"/>
+                                    <outlet property="title" destination="8X1-Xi-fjf" id="JgN-TS-i8a"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
