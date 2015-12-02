@@ -3,20 +3,21 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Issue List-->
         <scene sceneID="f0f-zZ-xAe">
             <objects>
                 <tableViewController title="Issue List" id="mqQ-EG-A57" customClass="IssueTableViewController" customModule="SilverQuill" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Lb-0B-vgK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Lb-0B-vgK">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IssueTableViewCell" rowHeight="101" id="sVd-6r-5J4" customClass="IssueTableViewCell" customModule="SilverQuill" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="101"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="101"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sVd-6r-5J4" id="gTt-5v-8hW">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="100.5"/>
@@ -27,26 +28,30 @@
                                             <animations/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOF-AI-sFH">
-                                            <rect key="frame" x="95" y="48" width="256" height="21"/>
+                                            <rect key="frame" x="95" y="35" width="256" height="21"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTw-3U-eVX">
-                                            <rect key="frame" x="485" y="35" width="69" height="30"/>
-                                            <animations/>
-                                            <state key="normal" title="Download"/>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8X1-Xi-fjf">
-                                            <rect key="frame" x="95" y="19" width="256" height="21"/>
+                                            <rect key="frame" x="95" y="14" width="256" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTw-3U-eVX">
+                                            <rect key="frame" x="523" y="61" width="69" height="30"/>
+                                            <animations/>
+                                            <state key="normal" title="Download"/>
+                                        </button>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="fTw-3U-eVX" firstAttribute="trailing" secondItem="gTt-5v-8hW" secondAttribute="trailingMargin" id="WmR-gD-XQu"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="fTw-3U-eVX" secondAttribute="bottom" constant="1.5" id="WwK-z2-zdT"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
@@ -61,6 +66,7 @@
                             <outlet property="delegate" destination="mqQ-EG-A57" id="t5f-p9-Yw0"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Library" image="Library" id="ThY-9u-kRw"/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="6IV-g3-svf"/>
                     <connections>
@@ -76,7 +82,8 @@
             <objects>
                 <navigationController title="Navigation Controller" id="y81-ku-n0c" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="LCx-Bv-7MB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Ve-Bc-fwk">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="1Ve-Bc-fwk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
@@ -89,13 +96,22 @@
             </objects>
             <point key="canvasLocation" x="-3334" y="-114"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Silver Quill-->
         <scene sceneID="wJ7-sY-POs">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="34Q-35-aHd" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="lo6-zH-s75"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="Edp-gd-QLP">
+                    <navigationItem key="navigationItem" title="Silver Quill" id="lo6-zH-s75">
+                        <barButtonItem key="rightBarButtonItem" image="Settings" id="Yv3-Z6-Fa6">
+                            <connections>
+                                <segue destination="igc-EO-fOU" kind="show" id="71l-5d-M6b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Edp-gd-QLP">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -108,8 +124,28 @@
             </objects>
             <point key="canvasLocation" x="-2571" y="-114"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="KDF-VI-Ski">
+            <objects>
+                <viewController id="igc-EO-fOU" customClass="SettingsViewController" customModule="SilverQuill" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m3g-RJ-BMW"/>
+                        <viewControllerLayoutGuide type="bottom" id="qBC-88-ei2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="njH-tC-swR">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jfy-hW-LSe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1824" y="4"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Library" width="48" height="48"/>
+        <image name="Library" width="24" height="24"/>
+        <image name="Settings" width="24" height="24"/>
     </resources>
 </document>

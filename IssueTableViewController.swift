@@ -56,6 +56,9 @@ class IssueTableViewController: UITableViewController {
     func loadIssues() {
         let titlePrefix = "Silver Quill: "
         
+        let cover5 = UIImage(named: "issue5")
+        let issue5 = Issue(title: titlePrefix + "Lucid", cover: cover5, date: "2015")
+        
         let cover1 = UIImage(named: "issue1")
         let issue1 = Issue(title: titlePrefix + "Aurora", cover: cover1, date: "2013")
         
@@ -68,7 +71,7 @@ class IssueTableViewController: UITableViewController {
         let cover4 = UIImage(named: "issue4")
         let issue4 = Issue(title: titlePrefix + "Ink Track", cover: cover4, date: "2010")
         
-        issues += [issue1, issue2, issue3, issue4]
+        issues += [issue5, issue1, issue2, issue3, issue4]
         
     }
 
