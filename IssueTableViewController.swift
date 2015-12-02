@@ -54,7 +54,7 @@ class IssueTableViewController: UITableViewController {
     }
     
     func loadIssues() {
-        let titlePrefix = "Silver Quill: "
+        let titlePrefix = "SQ: "
         
         let cover5 = UIImage(named: "issue5")
         let issue5 = Issue(title: titlePrefix + "Lucid", cover: cover5, date: "2015")
