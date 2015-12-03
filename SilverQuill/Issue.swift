@@ -10,11 +10,13 @@ import UIKit
 
 class Issue {
     
+    let uniqueID: String
     var title: String
     var cover: UIImage
     var date: String
     
-    init(title: String, cover: UIImage?, date: String) {
+    init(id: String, title: String, cover: UIImage?, date: String) {
+        self.uniqueID = id
         self.title = title
         self.cover = cover!
         self.date = date

@@ -10,9 +10,10 @@ import UIKit
 
 class IssueTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var cover: UIImageView!
-    @IBOutlet weak var date: UILabel!
+    @IBOutlet var title: UILabel!
+    @IBOutlet var cover: UIImageView!
+    @IBOutlet var date: UILabel!
+    @IBOutlet var bdv: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +25,12 @@ class IssueTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func downloadIssue(sender: AnyObject) {
+        
+    }
 
+    @IBAction func viewIssue(sender: AnyObject) {
+        
+    }
 }

@@ -10,6 +10,9 @@ import UIKit
 
 class IssueTableViewController: UITableViewController {
     
+    let jsonURL:String = "http://silverquill.mbhs.edu/magazines/silverquill.json"
+    let jsonBackup:String = "https://mbhs-spc.github.io/testfiles/mbhssitedown.json"
+    
     var issues = [Issue]()
 
     override func viewDidLoad() {
@@ -29,14 +32,14 @@ class IssueTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
+    @IBAction func exitSettings(segue: UIStoryboardSegue) {
+    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return issues.count
     }
 
@@ -56,7 +59,28 @@ class IssueTableViewController: UITableViewController {
     func loadIssues() {
         let titlePrefix = "SQ: "
         
-        let cover5 = UIImage(named: "issue5")
+        var json = [String: AnyObject]()
+        
+        if let data = getJSON(jsonURL) {
+            json = parseJSON(data)
+        } else if let data = getJSON(jsonBackup) {
+            json = parseJSON(data)
+        }
+        
+        for issue in (json["issues"] as! [[String: String]]) {
+            let uniqueID = issue["uniqueID"]!
+            let title = titlePrefix + issue["title"]!
+            let date = issue["date"]!
+            
+            let coverName = "issue" + String(Int(issue["uniqueID"]!)!)
+            let cover = UIImage(named: coverName)
+            
+            self.issues += [Issue(id: uniqueID, title: title, cover: cover, date: date)]
+            
+            issues.sortInPlace { $0.uniqueID.compare($1.uniqueID) == .OrderedDescending}
+        }
+        
+        /*let cover5 = UIImage(named: "issue5")
         let issue5 = Issue(title: titlePrefix + "Lucid", cover: cover5, date: "2015")
         
         let cover1 = UIImage(named: "issue1")
@@ -71,8 +95,40 @@ class IssueTableViewController: UITableViewController {
         let cover4 = UIImage(named: "issue4")
         let issue4 = Issue(title: titlePrefix + "Ink Track", cover: cover4, date: "2010")
         
-        issues += [issue5, issue1, issue2, issue3, issue4]
+        issues += [issue5, issue1, issue2, issue3, issue4]*/
         
+    }
+    
+    func getJSON(urlToRequest: String) -> NSData? {
+        let url = NSURL(string: urlToRequest)!
+        return NSData(contentsOfURL: url)
+    }
+    
+    func parseJSON(data: NSData) -> Dictionary<String, AnyObject> {
+        var dict:Dictionary = [String: AnyObject]()
+        do {
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+            
+            if let title = json["magazine_title"] as? String {
+                dict["magazine_title"] = title
+            }
+            
+            if let purchID = json["in_app_purchase_id"] as? String {
+                dict["in_app_purchase_id"] = purchID
+            }
+            
+            if let version = json["docs_version"] as? String {
+                dict["docs_version"] = version
+            }
+            
+            if let issues = json["issues"] as? [[String: String]] {
+                dict["issues"] = issues
+            }
+            
+        } catch {
+            print("Error serializing JSON: \(error)")
+        }
+        return dict
     }
 
     /*

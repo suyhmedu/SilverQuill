@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34118AD81C0EBD7100620938 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34118AD71C0EBD7100620938 /* SettingsViewController.swift */; };
+		34609E721C10096400D0F743 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34609E711C10096400D0F743 /* StoreKit.framework */; };
+		34EF89EA1C0F9AD30000E33B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */; };
 		FB61E6161C03986C0065BABB /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB61E6151C03986C0065BABB /* Issue.swift */; };
 		FB61E61A1C03994D0065BABB /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */; };
 		FB61E61C1C0399680065BABB /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB61E61B1C0399680065BABB /* IssueTableViewController.swift */; };
@@ -38,7 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		34118AD71C0EBD7100620938 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		34609E711C10096400D0F743 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FB61E6151C03986C0065BABB /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		FB61E61B1C0399680065BABB /* IssueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IssueTableViewController.swift; path = ../IssueTableViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34609E721C10096400D0F743 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +88,7 @@
 		FBB8A52C1BED62E000023A62 = {
 			isa = PBXGroup;
 			children = (
+				34609E711C10096400D0F743 /* StoreKit.framework */,
 				FBB8A5371BED62E000023A62 /* SilverQuill */,
 				FBB8A54F1BED62E000023A62 /* SilverQuillTests */,
 				FBB8A55A1BED62E000023A62 /* SilverQuillUITests */,
@@ -105,10 +109,10 @@
 		FBB8A5371BED62E000023A62 /* SilverQuill */ = {
 			isa = PBXGroup;
 			children = (
+				34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */,
 				FBB8A5381BED62E000023A62 /* AppDelegate.swift */,
 				FBB8A53C1BED62E000023A62 /* Main.storyboard */,
 				FB61E61B1C0399680065BABB /* IssueTableViewController.swift */,
-				34118AD71C0EBD7100620938 /* SettingsViewController.swift */,
 				FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */,
 				FB61E6151C03986C0065BABB /* Issue.swift */,
 				FBB8A5421BED62E000023A62 /* Assets.xcassets */,
@@ -204,6 +208,15 @@
 				TargetAttributes = {
 					FBB8A5341BED62E000023A62 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 8V7W9DJD8T;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					FBB8A54B1BED62E000023A62 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -269,10 +282,10 @@
 			files = (
 				FB61E61C1C0399680065BABB /* IssueTableViewController.swift in Sources */,
 				FB61E61A1C03994D0065BABB /* IssueTableViewCell.swift in Sources */,
+				34EF89EA1C0F9AD30000E33B /* SettingsViewController.swift in Sources */,
 				FB61E6161C03986C0065BABB /* Issue.swift in Sources */,
 				FBB8A5411BED62E000023A62 /* SilverQuill.xcdatamodeld in Sources */,
 				FBB8A5391BED62E000023A62 /* AppDelegate.swift in Sources */,
-				34118AD81C0EBD7100620938 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,11 +427,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SilverQuill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spc.SilverQuill;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mbhs.spc.silverquill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -426,11 +442,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SilverQuill/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.spc.SilverQuill;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mbhs.spc.silverquill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
