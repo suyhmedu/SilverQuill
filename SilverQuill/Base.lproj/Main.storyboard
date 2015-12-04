@@ -15,7 +15,8 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="IssueTableViewCell" rowHeight="101" id="sVd-6r-5J4" customClass="IssueTableViewCell" customModule="SilverQuill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="101"/>
@@ -55,6 +56,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="bdv" destination="fTw-3U-eVX" id="gt5-7C-buJ"/>
                                     <outlet property="cover" destination="XNE-qG-zmu" id="xqA-1j-reA"/>
@@ -135,6 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <sections>
                             <tableViewSection headerTitle="Library" id="4j7-aM-qMp">
                                 <cells>
