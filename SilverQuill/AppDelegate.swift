@@ -14,9 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let jsonURL:String = "http://silverquill.mbhs.edu/magazines/silverquill.json"
+    let jsonBackup:String = "https://mbhs-spc.github.io/testfiles/mbhssitedown.json"
+    
+    var json = [String: AnyObject]()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let data = getJSON(jsonURL) {
+            json = parseJSON(data)
+        } else if let data = getJSON(jsonBackup) {
+            json = parseJSON(data)
+        }
+        
         return true
     }
 
@@ -105,6 +116,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+    // MARK: JSON Fetching and Parsing
+    
+    func getJSON(urlToRequest: String) -> NSData? {
+        let url = NSURL(string: urlToRequest)!
+        return NSData(contentsOfURL: url)
+    }
+    
+    func parseJSON(data: NSData) -> Dictionary<String, AnyObject> {
+        var dict:Dictionary = [String: AnyObject]()
+        do {
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+            
+            if let title = json["magazine_title"] as? String {
+                dict["magazine_title"] = title
+            }
+            
+            if let purchID = json["in_app_purchase_id"] as? String {
+                dict["in_app_purchase_id"] = purchID
+            }
+            
+            if let version = json["docs_version"] as? String {
+                dict["docs_version"] = version
+            }
+            
+            if let issues = json["issues"] as? [[String: String]] {
+                dict["issues"] = issues
+            }
+            
+        } catch {
+            print("Error serializing JSON: \(error)")
+        }
+        return dict
     }
 
 }

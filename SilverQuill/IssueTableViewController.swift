@@ -10,9 +10,6 @@ import UIKit
 
 class IssueTableViewController: UITableViewController {
     
-    let jsonURL:String = "http://silverquill.mbhs.edu/magazines/silverquill.json"
-    let jsonBackup:String = "https://mbhs-spc.github.io/testfiles/mbhssitedown.json"
-    
     var issues = [Issue]()
 
     override func viewDidLoad() {
@@ -59,13 +56,8 @@ class IssueTableViewController: UITableViewController {
     func loadIssues() {
         let titlePrefix = "SQ: "
         
-        var json = [String: AnyObject]()
-        
-        if let data = getJSON(jsonURL) {
-            json = parseJSON(data)
-        } else if let data = getJSON(jsonBackup) {
-            json = parseJSON(data)
-        }
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let json = delegate.json
         
         for issue in (json["issues"] as! [[String: String]]) {
             let uniqueID = issue["uniqueID"]!
@@ -80,56 +72,9 @@ class IssueTableViewController: UITableViewController {
             issues.sortInPlace { $0.uniqueID.compare($1.uniqueID) == .OrderedDescending}
         }
         
-        /*let cover5 = UIImage(named: "issue5")
-        let issue5 = Issue(title: titlePrefix + "Lucid", cover: cover5, date: "2015")
-        
-        let cover1 = UIImage(named: "issue1")
-        let issue1 = Issue(title: titlePrefix + "Aurora", cover: cover1, date: "2013")
-        
-        let cover2 = UIImage(named: "issue2")
-        let issue2 = Issue(title: titlePrefix + "Rhapsody", cover: cover2, date: "2012")
-        
-        let cover3 = UIImage(named: "issue3")
-        let issue3 = Issue(title: titlePrefix + "Abstraction", cover: cover3, date: "2011")
-        
-        let cover4 = UIImage(named: "issue4")
-        let issue4 = Issue(title: titlePrefix + "Ink Track", cover: cover4, date: "2010")
-        
-        issues += [issue5, issue1, issue2, issue3, issue4]*/
-        
     }
     
-    func getJSON(urlToRequest: String) -> NSData? {
-        let url = NSURL(string: urlToRequest)!
-        return NSData(contentsOfURL: url)
-    }
     
-    func parseJSON(data: NSData) -> Dictionary<String, AnyObject> {
-        var dict:Dictionary = [String: AnyObject]()
-        do {
-            let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-            
-            if let title = json["magazine_title"] as? String {
-                dict["magazine_title"] = title
-            }
-            
-            if let purchID = json["in_app_purchase_id"] as? String {
-                dict["in_app_purchase_id"] = purchID
-            }
-            
-            if let version = json["docs_version"] as? String {
-                dict["docs_version"] = version
-            }
-            
-            if let issues = json["issues"] as? [[String: String]] {
-                dict["issues"] = issues
-            }
-            
-        } catch {
-            print("Error serializing JSON: \(error)")
-        }
-        return dict
-    }
 
     /*
     // MARK: - Navigation
