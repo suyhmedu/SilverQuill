@@ -23,11 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "HasLaunchedOnce")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        
-        clearAllEntries()
-        
-        checkFirstLaunch()
         
         if let data = fetchDataFromUrl(jsonURL) {
             json = parseJSON(data)
@@ -35,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             json = parseJSON(data)
         }
         
-        checkData()
+        updateData()
         
         return true
     }
@@ -164,77 +159,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return dict
     }
-    
-    func checkData() {
-        
-        let context = self.managedObjectContext
-        
-        let request = NSFetchRequest(entityName: "Version")
-        
-        do {
 
-            
-            let results = try context.executeFetchRequest(request)
-            //self.managedObjectContext.deleteObject(results[1] as! NSManagedObject)
-            print(results[0])
-            let localVersion = results[0] as! Version
-            
-            let entity = NSEntityDescription.entityForName("Version", inManagedObjectContext: context)
-            let verString = json["docs_version"] as! String
-            let serverVersion = Version(dotSeparated: verString, entity: entity!, insertIntoManagedObjectContext: context)
-            
-            if (serverVersion > localVersion) {
-                print("Currently updating local version \(localVersion) to server version \(serverVersion)")
+    
+    func updateData() {
+        let serverVersion = Version(dotSeparated: (json["docs_version"] as! String))
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+
+        if let local = defaults.valueForKey("version") as? NSData {
+            let localVersion = NSKeyedUnarchiver(forReadingWithData: local).decodeObjectForKey("root") as! Version
+            if (localVersion < serverVersion) {
+                print("Updating local version \(localVersion) to server version \(localVersion)")
+                pullAllIssues()
+                defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(serverVersion), forKey: "version")
             } else {
-                print("Current version \(localVersion) is newest available")
+                print("Current version \(localVersion) is the newest")
             }
-            
-            try context.save()
-            
-        } catch {
-            print("Error checking version: \(error)")
+        } else {
+            defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(serverVersion), forKey: "version")
+            print("First run! \(serverVersion)")
+            pullAllIssues()
         }
         
     }
     
-    func clearAllEntries() {
+    func pullAllIssues() {
         
-        let context = self.managedObjectContext
-        let request = NSFetchRequest(entityName: "Version")
-        
-        do {
-            let results = try context.executeFetchRequest(request)
-            var count = 1
-            for entry in results {
-                context.deleteObject(entry as! NSManagedObject)
-                print("Deleted \(count++) entries.")
-            }
-            
-        } catch {
-            print("Error deleting all entries: \(error)")
-        }
-        
-    }
-    
-    func checkFirstLaunch() {
-        if(NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
-        }
-        else
-        {
-            
-            let context = self.managedObjectContext
-            let entity = NSEntityDescription.entityForName("Version", inManagedObjectContext: context)
-            
-            let baseVersion = Version(dotSeparated: "0.0.0", entity: entity!, insertIntoManagedObjectContext: context)
-            baseVersion.major = 0;
-            
-            do {try self.managedObjectContext.save()
-            } catch {
-                print(error)
-            }
-            
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
-        }
     }
 
 }

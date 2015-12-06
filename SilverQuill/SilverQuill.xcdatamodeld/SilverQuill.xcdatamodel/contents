@@ -6,14 +6,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Version" representedClassName="" syncable="YES">
-        <attribute name="major" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="minor" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="patch" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <fetchRequest name="FetchRequest" entity="Version"/>
     <elements>
         <element name="Issue" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Version" positionX="178" positionY="-9" width="128" height="88"/>
     </elements>
 </model>

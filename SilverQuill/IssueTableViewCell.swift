@@ -24,6 +24,8 @@ class IssueTableViewCell: UITableViewCell {
         cover.layer.borderWidth = 2.0
         */
         
+        bdv.titleLabel!.textColor = Constants.BlazerRed
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

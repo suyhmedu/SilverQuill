@@ -46,7 +46,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTw-3U-eVX">
                                             <rect key="frame" x="523" y="35" width="69" height="30"/>
                                             <animations/>
-                                            <state key="normal" title="Download"/>
+                                            <state key="normal" title="Download">
+                                                <color key="titleColor" red="0.81568627450980391" green="0.027450980392156862" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                         </button>
                                     </subviews>
                                     <animations/>
@@ -157,7 +159,9 @@
                                                         <constraint firstAttribute="width" constant="370" id="soA-Nr-GnT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Restore Old Purchases"/>
+                                                    <state key="normal" title="Restore Old Purchases">
+                                                        <color key="titleColor" red="0.81568627450980391" green="0.027450980392156862" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="CWE-0t-RDs"/>
@@ -220,7 +224,9 @@
                                                         <constraint firstAttribute="width" constant="370" id="men-xF-daw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Subscribe For Free!"/>
+                                                    <state key="normal" title="Subscribe For Free!">
+                                                        <color key="titleColor" red="0.81568627450980391" green="0.027450980392156862" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="J4A-dD-a2M"/>
@@ -347,6 +353,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Settings" id="YDa-ve-vzz">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="A2h-Y4-nhT">
+                            <color key="tintColor" red="0.81568627450980391" green="0.027450980392156862" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="JW3-QL-k11" kind="unwind" unwindAction="exitSettings:" id="Ioc-vC-3am"/>
                             </connections>

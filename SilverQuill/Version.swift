@@ -7,27 +7,49 @@
 //
 
 import UIKit
-import CoreData
 
-class Version: NSData {
+class Version: NSObject, NSCoding, Comparable {
     
-    @NSManaged var major: Int16
-    @NSManaged var minor: Int16
-    @NSManaged var patch: Int16
+    //major, minor, and patch version numbers
+    var major: Int
+    var minor: Int
+    var patch: Int
     
+    //display in format major.minor.patch
     override var description: String {
         return "\(major).\(minor).\(patch)"
     }
     
-    init(dotSeparated: String, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext) {
-        super.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
-        
+    //initialize with each int defined
+    init(major: Int, minor: Int, patch: Int) {
+        self.major = major
+        self.minor = minor
+        self.patch = patch
+    }
+    
+    //initialize from dot separated string
+    convenience init(dotSeparated: String) {
         let vlist = dotSeparated.componentsSeparatedByString(".")
         
-        self.major = Int16(vlist[0])!
-        self.minor = Int16(vlist[1])!
-        self.patch = Int16(vlist[2])!
+        let maj = Int(vlist[0])!
+        let min = Int(vlist[1])!
+        let pat = Int(vlist[2])!
         
+        self.init(major: maj, minor: min, patch: pat)
+    }
+    
+    
+    convenience required init?(coder aDecoder: NSCoder) {
+        let maj = aDecoder.decodeObjectForKey("major") as! Int
+        let min = aDecoder.decodeObjectForKey("minor") as! Int
+        let pat = aDecoder.decodeObjectForKey("patch") as! Int
+        self.init(major: maj, minor: min, patch: pat)
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(major, forKey: "major")
+        coder.encodeObject(minor, forKey: "minor")
+        coder.encodeObject(patch, forKey: "patch")
     }
     
 }
