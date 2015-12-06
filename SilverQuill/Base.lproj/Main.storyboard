@@ -108,6 +108,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Silver Quill" id="lo6-zH-s75">
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="Yv3-Z6-Fa6">
+                            <color key="tintColor" red="0.81568627449999997" green="0.027450980390000001" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="mFq-Ka-OJq" kind="presentation" id="jhF-IO-swm"/>
                             </connections>

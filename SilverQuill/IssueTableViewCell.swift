@@ -18,6 +18,12 @@ class IssueTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        /* Add a 2px red border to each cover
+        cover.layer.borderColor! = Constants.BlazerRed.CGColor
+        cover.layer.borderWidth = 2.0
+        */
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

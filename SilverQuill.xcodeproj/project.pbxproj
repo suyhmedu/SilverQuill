@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		34609E721C10096400D0F743 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34609E711C10096400D0F743 /* StoreKit.framework */; };
+		34A76D3F1C13D5C60065E790 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A76D3E1C13D5C60065E790 /* Constants.swift */; };
+		34A76D411C13E3010065E790 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A76D401C13E3010065E790 /* Version.swift */; };
 		34EF89EA1C0F9AD30000E33B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */; };
 		FB61E6161C03986C0065BABB /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB61E6151C03986C0065BABB /* Issue.swift */; };
 		FB61E61A1C03994D0065BABB /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		34609E711C10096400D0F743 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		34A76D3E1C13D5C60065E790 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		34A76D401C13E3010065E790 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FB61E6151C03986C0065BABB /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
@@ -114,7 +118,9 @@
 				FBB8A53C1BED62E000023A62 /* Main.storyboard */,
 				FB61E61B1C0399680065BABB /* IssueTableViewController.swift */,
 				FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */,
+				34A76D3E1C13D5C60065E790 /* Constants.swift */,
 				FB61E6151C03986C0065BABB /* Issue.swift */,
+				34A76D401C13E3010065E790 /* Version.swift */,
 				FBB8A5421BED62E000023A62 /* Assets.xcassets */,
 				FBB8A5441BED62E000023A62 /* LaunchScreen.storyboard */,
 				FBB8A5471BED62E000023A62 /* Info.plist */,
@@ -282,9 +288,11 @@
 			files = (
 				FB61E61C1C0399680065BABB /* IssueTableViewController.swift in Sources */,
 				FB61E61A1C03994D0065BABB /* IssueTableViewCell.swift in Sources */,
+				34A76D3F1C13D5C60065E790 /* Constants.swift in Sources */,
 				34EF89EA1C0F9AD30000E33B /* SettingsViewController.swift in Sources */,
 				FB61E6161C03986C0065BABB /* Issue.swift in Sources */,
 				FBB8A5411BED62E000023A62 /* SilverQuill.xcdatamodeld in Sources */,
+				34A76D411C13E3010065E790 /* Version.swift in Sources */,
 				FBB8A5391BED62E000023A62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

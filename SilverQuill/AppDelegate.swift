@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  SilverQuill
 //
-//  Created by SmartPhoneClub on 11/6/15.
+//  Created by Isaac Eaton on 11/6/15.
 //  Copyright © 2015 SmartPhoneClub. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let jsonURL:String = "http://silverquill.mbhs.edu/magazines/silverquill.json"
+    let jsonURL:String = "https://silverquill.mbhs.edu/magazines/silverquill.json"
     let jsonBackup:String = "https://mbhs-spc.github.io/testfiles/mbhssitedown.json"
     
     var json = [String: AnyObject]()
@@ -22,11 +22,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "HasLaunchedOnce")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        clearAllEntries()
+        
+        checkFirstLaunch()
+        
         if let data = fetchDataFromUrl(jsonURL) {
             json = parseJSON(data)
         } else if let data = fetchDataFromUrl(jsonBackup) {
             json = parseJSON(data)
         }
+        
+        checkData()
         
         return true
     }
@@ -120,6 +129,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: JSON Fetching and Parsing
     
+    func issuesUpToDate() -> Bool {
+        return true
+    }
+    
     func fetchDataFromUrl(urlToRequest: String) -> NSData? {
         let url = NSURL(string: urlToRequest)!
         return NSData(contentsOfURL: url)
@@ -150,6 +163,78 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error serializing JSON: \(error)")
         }
         return dict
+    }
+    
+    func checkData() {
+        
+        let context = self.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "Version")
+        
+        do {
+
+            
+            let results = try context.executeFetchRequest(request)
+            //self.managedObjectContext.deleteObject(results[1] as! NSManagedObject)
+            print(results[0])
+            let localVersion = results[0] as! Version
+            
+            let entity = NSEntityDescription.entityForName("Version", inManagedObjectContext: context)
+            let verString = json["docs_version"] as! String
+            let serverVersion = Version(dotSeparated: verString, entity: entity!, insertIntoManagedObjectContext: context)
+            
+            if (serverVersion > localVersion) {
+                print("Currently updating local version \(localVersion) to server version \(serverVersion)")
+            } else {
+                print("Current version \(localVersion) is newest available")
+            }
+            
+            try context.save()
+            
+        } catch {
+            print("Error checking version: \(error)")
+        }
+        
+    }
+    
+    func clearAllEntries() {
+        
+        let context = self.managedObjectContext
+        let request = NSFetchRequest(entityName: "Version")
+        
+        do {
+            let results = try context.executeFetchRequest(request)
+            var count = 1
+            for entry in results {
+                context.deleteObject(entry as! NSManagedObject)
+                print("Deleted \(count++) entries.")
+            }
+            
+        } catch {
+            print("Error deleting all entries: \(error)")
+        }
+        
+    }
+    
+    func checkFirstLaunch() {
+        if(NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")) {
+        }
+        else
+        {
+            
+            let context = self.managedObjectContext
+            let entity = NSEntityDescription.entityForName("Version", inManagedObjectContext: context)
+            
+            let baseVersion = Version(dotSeparated: "0.0.0", entity: entity!, insertIntoManagedObjectContext: context)
+            baseVersion.major = 0;
+            
+            do {try self.managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+            
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
+        }
     }
 
 }
