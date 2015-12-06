@@ -64,8 +64,8 @@ class IssueTableViewController: UITableViewController {
             let title = titlePrefix + issue["title"]!
             let date = issue["date"]!
             
-            let coverName = "issue" + String(Int(issue["uniqueID"]!)!)
-            let cover = UIImage(named: coverName)
+            let imgData = delegate.fetchDataFromUrl(issue["coverUrl"]!)
+            let cover = UIImage(data: imgData!)
             
             self.issues += [Issue(id: uniqueID, title: title, cover: cover, date: date)]
             

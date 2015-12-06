@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        if let data = getJSON(jsonURL) {
+        if let data = fetchDataFromUrl(jsonURL) {
             json = parseJSON(data)
-        } else if let data = getJSON(jsonBackup) {
+        } else if let data = fetchDataFromUrl(jsonBackup) {
             json = parseJSON(data)
         }
         
@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: JSON Fetching and Parsing
     
-    func getJSON(urlToRequest: String) -> NSData? {
+    func fetchDataFromUrl(urlToRequest: String) -> NSData? {
         let url = NSURL(string: urlToRequest)!
         return NSData(contentsOfURL: url)
     }
