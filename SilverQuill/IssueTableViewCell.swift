@@ -39,8 +39,6 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
         
         progressBar.setProgress(0.0, animated: true)
         
-        bdv.addTarget(self, action: "downloadIssue:", forControlEvents: .TouchUpInside)
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -94,6 +92,7 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
         bdv.setTitle("Download", forState: .Normal)
         
         //bdv.removeTarget(self, action: "cancelDownload:", forControlEvents: .TouchUpInside)
+        bdv.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         bdv.addTarget(self, action: "downloadIssue:", forControlEvents: .TouchUpInside)
         
         self.task.cancel()
@@ -117,7 +116,6 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         
-        print("made it here")
         let docsDirectoryUrl = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         print("Finished download")
         
@@ -128,13 +126,16 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
             
             issue.fileLocation = destinationUrl
             
-            bdv.setTitle("View", forState: .Normal)
+            print(issue)
+            bdv.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             bdv.addTarget(self, action: "viewIssue:", forControlEvents: .TouchUpInside)
+            bdv.setTitle("View", forState: .Normal)
             
         } catch {
             print("Error saving file: \(error)")
-            bdv.setTitle("Download", forState: .Normal)
+            bdv.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             bdv.addTarget(self, action: "downloadIssue:", forControlEvents: .TouchUpInside)
+            bdv.setTitle("Download", forState: .Normal)
         }
         
         progressBar.hidden = true
@@ -151,7 +152,7 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
     //MARK: - Viewing
     
     @IBAction func viewIssue(sender: AnyObject) {
-        
+        print("view issue at \(issue.fileLocation)" )
     }
     
 }

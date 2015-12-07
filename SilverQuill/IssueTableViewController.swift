@@ -58,6 +58,8 @@ class IssueTableViewController: UITableViewController {
         if issue.fileLocation != nil {
             cell.bdv.addTarget(cell, action: "viewIssue:", forControlEvents: .TouchUpInside)
             cell.bdv.setTitle("View", forState: .Normal)
+        } else {
+            cell.bdv.addTarget(cell, action: "downloadIssue:", forControlEvents: .TouchUpInside)
         }
         
         
