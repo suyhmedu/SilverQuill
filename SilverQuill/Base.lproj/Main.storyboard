@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="101"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sVd-6r-5J4" id="gTt-5v-8hW">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="101"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XNE-qG-zmu">
@@ -118,8 +118,6 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Library" image="Library" id="ThY-9u-kRw"/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="6IV-g3-svf"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="view" destination="6Lb-0B-vgK" id="kS3-Gc-eAh"/>
                     </connections>
