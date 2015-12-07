@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         updateData()
         
+        window?.tintColor = Constants.BlazerRed
+        
         return true
     }
 
@@ -122,11 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // MARK: JSON Fetching and Parsing
-    
-    func issuesUpToDate() -> Bool {
-        return true
-    }
+    // MARK: - Web Fetching and JSON Parsing
     
     func fetchDataFromUrl(urlToRequest: String) -> NSData? {
         let url = NSURL(string: urlToRequest)!
@@ -160,6 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return dict
     }
 
+    // MARK: - Data Versioning
     
     func updateData() {
         let serverVersion = Version(dotSeparated: (json["docs_version"] as! String))
@@ -169,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let local = defaults.valueForKey("version") as? NSData {
             let localVersion = NSKeyedUnarchiver(forReadingWithData: local).decodeObjectForKey("root") as! Version
             if (localVersion < serverVersion) {
-                print("Updating local version \(localVersion) to server version \(localVersion)")
+                print("Updating local version \(localVersion) to server version \(serverVersion)")
                 pullAllIssues()
                 defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(serverVersion), forKey: "version")
             } else {
@@ -183,7 +182,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    // MARK: - Issue Saving and Loading
+    
+
+    
+    func deleteAllIssues() {
+        
+        let context = self.managedObjectContext
+        let request = NSFetchRequest(entityName: "Issue")
+        
+        do {
+            let results = try context.executeFetchRequest(request)
+            for item in results {
+                context.deleteObject(item as! NSManagedObject)
+            }
+            //issues.sortInPlace { $0.uniqueID.compare($1.uniqueID) == .OrderedDescending}
+        } catch {
+            print("Could not execute search for issues: \(error)")
+        }
+        
+    }
+    
     func pullAllIssues() {
+        
+        deleteAllIssues()
+        
+        let context = self.managedObjectContext
+        let entity = NSEntityDescription.entityForName("Issue", inManagedObjectContext: context)
+        
+        let titlePrefix = "SQ: "
+        
+        for issue in (json["issues"] as! [[String: String]]) {
+            let uniqueID = issue["uniqueID"]!
+            let title = titlePrefix + issue["title"]!
+            let date = issue["date"]!
+            
+            let imgData = self.fetchDataFromUrl(issue["coverUrl"]!)
+            let cover = UIImage(data: imgData!)
+            
+            let entry = Issue(id: uniqueID, title: title, cover: cover, date: date, entity: entity!, insertIntoContext: context)
+            
+            entry.fileType = issue["type"]!
+            entry.webLocation = issue["contentUrl"]!
+            
+            print(entry.webLocation)
+            
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Could not save context: \(error)")
+        }
         
     }
 

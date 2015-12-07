@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class IssueTableViewController: UITableViewController {
     
@@ -15,13 +16,8 @@ class IssueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         loadIssues()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,17 +25,22 @@ class IssueTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    //one section in table view
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
+    //return to this controller when exiting settings
     @IBAction func exitSettings(segue: UIStoryboardSegue) {
+        //THIS IS A COMPLETE IMPLEMENTATION
     }
 
+    //get the number of rows in the table view
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return issues.count
     }
 
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = "IssueTableViewCell"
         
@@ -49,33 +50,39 @@ class IssueTableViewController: UITableViewController {
         cell.title.text = issue.title
         cell.cover.image = issue.cover
         cell.date.text = issue.date
-
+        
+        cell.issue = issue
+        
+        print(issue.fileLocation)
+        
+        if issue.fileLocation != nil {
+            cell.bdv.addTarget(cell, action: "viewIssue:", forControlEvents: .TouchUpInside)
+            cell.bdv.setTitle("View", forState: .Normal)
+        }
+        
+        
         return cell
     }
     
     func loadIssues() {
-        let titlePrefix = "SQ: "
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let json = delegate.json
+        let context = delegate.managedObjectContext
+        let request = NSFetchRequest(entityName: "Issue")
         
-        for issue in (json["issues"] as! [[String: String]]) {
-            let uniqueID = issue["uniqueID"]!
-            let title = titlePrefix + issue["title"]!
-            let date = issue["date"]!
-            
-            let imgData = delegate.fetchDataFromUrl(issue["coverUrl"]!)
-            let cover = UIImage(data: imgData!)
-            
-            self.issues += [Issue(id: uniqueID, title: title, cover: cover, date: date)]
-            
-            issues.sortInPlace { $0.uniqueID.compare($1.uniqueID) == .OrderedDescending}
+        do {
+            let results = try context.executeFetchRequest(request)
+            print("Found \(results.count) issues")
+            for item in results {
+                issues += [item as! Issue]
+            }
+            issues.sortInPlace {$0.uniqueID.compare($1.uniqueID) == .OrderedDescending}
+        } catch {
+            print("Could not execute search for issues: \(error)")
         }
         
     }
     
-    
-
     /*
     // MARK: - Navigation
 

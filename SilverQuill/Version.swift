@@ -39,13 +39,15 @@ class Version: NSObject, NSCoding, Comparable {
     }
     
     
-    convenience required init?(coder aDecoder: NSCoder) {
+    //tell decoder how to decode each field and reassemble
+    required convenience init?(coder aDecoder: NSCoder) {
         let maj = aDecoder.decodeObjectForKey("major") as! Int
         let min = aDecoder.decodeObjectForKey("minor") as! Int
         let pat = aDecoder.decodeObjectForKey("patch") as! Int
         self.init(major: maj, minor: min, patch: pat)
     }
     
+    //tell encoder how to encode each object
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(major, forKey: "major")
         coder.encodeObject(minor, forKey: "minor")
@@ -54,6 +56,7 @@ class Version: NSObject, NSCoding, Comparable {
     
 }
 
+//defines check for equality
 func ==(lhs: Version, rhs: Version) -> Bool {
     if (lhs.major == lhs.major) {
         if (lhs.minor == lhs.minor) {
@@ -65,6 +68,7 @@ func ==(lhs: Version, rhs: Version) -> Bool {
     return false
 }
 
+//defines check for less than
 func <(lhs: Version, rhs: Version) -> Bool {
     if (lhs.major == rhs.minor) {
         if (lhs.minor == rhs.minor) {

@@ -113,11 +113,11 @@
 		FBB8A5371BED62E000023A62 /* SilverQuill */ = {
 			isa = PBXGroup;
 			children = (
-				34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */,
 				FBB8A5381BED62E000023A62 /* AppDelegate.swift */,
 				FBB8A53C1BED62E000023A62 /* Main.storyboard */,
 				FB61E61B1C0399680065BABB /* IssueTableViewController.swift */,
 				FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */,
+				34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */,
 				34A76D3E1C13D5C60065E790 /* Constants.swift */,
 				FB61E6151C03986C0065BABB /* Issue.swift */,
 				34A76D401C13E3010065E790 /* Version.swift */,
