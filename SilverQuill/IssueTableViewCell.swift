@@ -131,7 +131,7 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
             try NSFileManager().moveItemAtURL(location, toURL: destinationUrl)
             print("Saved file at \(destinationUrl)")
             
-            issue.fileLocation = destinationUrl
+            issue.fileLocation = downloadTask.response!.suggestedFilename!
             
             //save context
             try issue.managedObjectContext!.save()

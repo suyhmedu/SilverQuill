@@ -20,14 +20,14 @@ class Issue: NSManagedObject {
     
     //file properties
     @NSManaged var webLocation: NSURL
-    @NSManaged var fileLocation: NSURL?
+    @NSManaged var fileLocation: String?
     @NSManaged var fileType: String
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
-    func quickSet(id: String, title: String, cover: UIImage, date: String, webLocation: NSURL, fileLocation: NSURL?, fileType: String) {
+    func quickSet(id: String, title: String, cover: UIImage, date: String, webLocation: NSURL, fileLocation: String?, fileType: String) {
         
         self.uniqueID = id
         self.title = title

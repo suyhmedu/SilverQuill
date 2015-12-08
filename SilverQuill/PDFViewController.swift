@@ -14,13 +14,16 @@ class PDFViewController: UIViewController {
     @IBOutlet var webView: UIWebView!
     
     //location of file, should be passed in prepareforsegue
-    var location: NSURL?
+    var location: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //create a request for the file and load it
-        let req = NSURLRequest(URL: location!)
+        
+        let docs = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        let url = docs.URLByAppendingPathComponent(location!)
+        let req = NSURLRequest(URL: url)
         webView.loadRequest(req)
     }
 

@@ -126,7 +126,9 @@ class IssueTableViewController: UITableViewController {
         let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath) as! IssueTableViewCell
         let issue = cell.issue
         do {
-            try NSFileManager.defaultManager().removeItemAtURL(issue.fileLocation!)
+            let docs = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+            let url = docs.URLByAppendingPathComponent(issue.fileLocation!)
+            try NSFileManager.defaultManager().removeItemAtURL(url)
             
             issue.fileLocation = nil
             
@@ -152,6 +154,7 @@ class IssueTableViewController: UITableViewController {
         //get the cell containing the button and pull data from it
         if let button = sender as? UIButton {
             let cell = button.superview?.superview as! IssueTableViewCell
+            
             dest.location = cell.issue.fileLocation
             dest.navbar.title! = "Silver Quill: " + cell.issue.title
         }
