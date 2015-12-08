@@ -7,9 +7,9 @@
         <attribute name="fileType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="webLocation" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Issue" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Issue" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

@@ -10,6 +10,7 @@ import UIKit
 
 class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
 
+    //ui objects
     @IBOutlet var title: UILabel!
     @IBOutlet var cover: UIImageView!
     @IBOutlet var date: UILabel!
@@ -17,15 +18,22 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
     @IBOutlet var progressBar: UIProgressView!
     @IBOutlet var downLabel: UILabel!
     
-    @IBOutlet var issue: Issue!
+    //data sources
+    var issue: Issue!
+    var controller: IssueTableViewController!
+    
+    //task
     var task: NSURLSessionTask!
     
+    //when needed create a url session
     lazy var session: NSURLSession = {
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         config.allowsCellularAccess = false
         let session = NSURLSession(configuration: config, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
         return session
     }()
+    
+    //MARK: Overrides
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,15 +43,12 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
         cover.layer.borderWidth = 2.0
         // */
         
-        //bdv.titleLabel!.textColor = Constants.BlazerRed
-        
         progressBar.setProgress(0.0, animated: true)
         
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -51,32 +56,34 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
     
     @IBAction func downloadIssue(sender: AnyObject) {
         
-        
-        
         //don't do anything if already downloading
         if self.task != nil {
             self.task = nil
         }
         
+        //TODO: after testing, assume file exists
         var url: NSURL?
         if issue.webLocation == "" {
-            url = NSURL(string: "https://silverquill.mbhs.edu/magazines/smalltestfile.dat")
+            url = NSURL(string: "https://silverquill.mbhs.edu/magazines/smallpdf.pdf")
         } else {
-            url = NSURL(string: issue.webLocation)
+            url = issue.webLocation
         }
         
+        //create request and make download task
         let req = NSMutableURLRequest(URL: url!)
         self.task = self.session.downloadTaskWithRequest(req)
         
         //start download
         self.task.resume()
         
+        //set up button for cancelling
+        bdv.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        bdv.addTarget(self, action: "cancelDownload:", forControlEvents: .TouchUpInside)
+        bdv.setTitle("Cancel", forState: .Normal)
+        
+        //reveal ui items
         progressBar.hidden = false
         downLabel.hidden = false
-        bdv.setTitle("Cancel", forState: .Normal)
-        bdv.addTarget(self, action: "cancelDownload:", forControlEvents: .TouchUpInside)
-        
-
         
     }
     
@@ -126,13 +133,18 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
             
             issue.fileLocation = destinationUrl
             
-            print(issue)
+            //save context
+            try issue.managedObjectContext!.save()
+            
+            //set up button for viewing
             bdv.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             bdv.addTarget(self, action: "viewIssue:", forControlEvents: .TouchUpInside)
             bdv.setTitle("View", forState: .Normal)
             
         } catch {
             print("Error saving file: \(error)")
+            
+            //set up button for downloading
             bdv.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
             bdv.addTarget(self, action: "downloadIssue:", forControlEvents: .TouchUpInside)
             bdv.setTitle("Download", forState: .Normal)
@@ -151,8 +163,10 @@ class IssueTableViewCell: UITableViewCell, NSURLSessionDownloadDelegate {
     
     //MARK: - Viewing
     
+    //TODO: do this in a less shitty manner
     @IBAction func viewIssue(sender: AnyObject) {
-        print("view issue at \(issue.fileLocation)" )
+        print("Trying to view: \(issue.fileLocation)")
+        self.controller.performSegueWithIdentifier("viewFile", sender: sender)
     }
     
 }

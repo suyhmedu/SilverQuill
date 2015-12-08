@@ -6,7 +6,7 @@
 //  Copyright © 2015 SmartPhoneClub. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Version: NSObject, NSCoding, Comparable {
     

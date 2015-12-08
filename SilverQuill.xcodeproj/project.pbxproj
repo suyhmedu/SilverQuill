@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		343CD5701C1527DA006F26BA /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD56F1C1527DA006F26BA /* PDFViewController.swift */; };
 		34609E721C10096400D0F743 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34609E711C10096400D0F743 /* StoreKit.framework */; };
 		34A76D3F1C13D5C60065E790 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A76D3E1C13D5C60065E790 /* Constants.swift */; };
 		34A76D411C13E3010065E790 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A76D401C13E3010065E790 /* Version.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		343CD56F1C1527DA006F26BA /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		34609E711C10096400D0F743 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		34A76D3E1C13D5C60065E790 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		34A76D401C13E3010065E790 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				FBB8A53C1BED62E000023A62 /* Main.storyboard */,
 				FB61E61B1C0399680065BABB /* IssueTableViewController.swift */,
 				FB61E6191C03994D0065BABB /* IssueTableViewCell.swift */,
+				343CD56F1C1527DA006F26BA /* PDFViewController.swift */,
 				34EF89E91C0F9AD30000E33B /* SettingsViewController.swift */,
 				34A76D3E1C13D5C60065E790 /* Constants.swift */,
 				FB61E6151C03986C0065BABB /* Issue.swift */,
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343CD5701C1527DA006F26BA /* PDFViewController.swift in Sources */,
 				FB61E61C1C0399680065BABB /* IssueTableViewController.swift in Sources */,
 				FB61E61A1C03994D0065BABB /* IssueTableViewCell.swift in Sources */,
 				34A76D3F1C13D5C60065E790 /* Constants.swift in Sources */,

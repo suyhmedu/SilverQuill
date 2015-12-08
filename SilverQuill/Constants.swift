@@ -9,6 +9,12 @@
 import UIKit
 
 struct Constants {
-    static let BlazerRed = UIColor(colorLiteralRed: 208.0/255, green: 7.0/255, blue: 2.0/255, alpha: 1.0)
+    
+    struct Colors {
+        
+        static let BlazerRed = UIColor(colorLiteralRed: 208.0/255, green: 7.0/255, blue: 2.0/255, alpha: 1.0)
+        
+    }
+    
 }
 

@@ -12,30 +12,30 @@ import CoreData
 //class Issue {
 class Issue: NSManagedObject {
     
-    //properties also stored in coredata
+    //metadata and ui properties
     @NSManaged var uniqueID: String
     @NSManaged var title: String
     @NSManaged var cover: UIImage
     @NSManaged var date: String
     
+    //file properties
+    @NSManaged var webLocation: NSURL
     @NSManaged var fileLocation: NSURL?
     @NSManaged var fileType: String
     
-    @NSManaged var webLocation: String
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
     
-    //var dataURL: NSURL?
-    
-    convenience init(id: String, title: String, cover: UIImage?, date: String, entity: NSEntityDescription, insertIntoContext: NSManagedObjectContext) {
+    func quickSet(id: String, title: String, cover: UIImage, date: String, webLocation: NSURL, fileLocation: NSURL?, fileType: String) {
         
-        //init with inherited initializer
-        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoContext)
-        
-        //assign values to properties
         self.uniqueID = id
         self.title = title
-        self.cover = cover!
+        self.cover = cover
         self.date = date
-        
+        self.webLocation = webLocation
+        self.fileLocation = fileLocation
+        self.fileType = fileType
     }
     
 }

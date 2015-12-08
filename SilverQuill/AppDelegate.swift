@@ -24,15 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "HasLaunchedOnce")
         
+        //l
         if let data = fetchDataFromUrl(jsonURL) {
             json = parseJSON(data)
         } else if let data = fetchDataFromUrl(jsonBackup) {
             json = parseJSON(data)
         }
         
-        updateData()
+        //updateData()
         
-        window?.tintColor = Constants.BlazerRed
+        window?.tintColor = Constants.Colors.BlazerRed
         
         return true
     }
@@ -161,10 +162,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Data Versioning
     
     func updateData() {
+        
+        //get server version from json
         let serverVersion = Version(dotSeparated: (json["docs_version"] as! String))
         
+        //load defaults
         let defaults = NSUserDefaults.standardUserDefaults()
 
+        //if a version is stored locally
         if let local = defaults.valueForKey("version") as? NSData {
             let localVersion = NSKeyedUnarchiver(forReadingWithData: local).decodeObjectForKey("root") as! Version
             if (localVersion < serverVersion) {
@@ -184,9 +189,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Issue Saving and Loading
     
-
-    
+    //deletes all issues
     func deleteAllIssues() {
+        
         
         let context = self.managedObjectContext
         let request = NSFetchRequest(entityName: "Issue")
@@ -196,39 +201,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for item in results {
                 context.deleteObject(item as! NSManagedObject)
             }
-            //issues.sortInPlace { $0.uniqueID.compare($1.uniqueID) == .OrderedDescending}
         } catch {
             print("Could not execute search for issues: \(error)")
         }
         
     }
     
+    //deletes issues, and pulls new versions from server
     func pullAllIssues() {
         
+        //delete all issues
         deleteAllIssues()
         
+        //get context and create issue entity
         let context = self.managedObjectContext
         let entity = NSEntityDescription.entityForName("Issue", inManagedObjectContext: context)
         
-        let titlePrefix = "SQ: "
-        
+        //for each issue in the dictionary of arrays
         for issue in (json["issues"] as! [[String: String]]) {
-            let uniqueID = issue["uniqueID"]!
-            let title = titlePrefix + issue["title"]!
-            let date = issue["date"]!
             
+            //fetch the image
             let imgData = self.fetchDataFromUrl(issue["coverUrl"]!)
-            let cover = UIImage(data: imgData!)
             
-            let entry = Issue(id: uniqueID, title: title, cover: cover, date: date, entity: entity!, insertIntoContext: context)
+            //create entry in coredata
+            let entry = Issue(entity: entity!, insertIntoManagedObjectContext: context)
             
+            //update all parameters except local location
+            entry.uniqueID = issue["uniqueID"]!
+            entry.title = issue["title"]!
+            entry.date = issue["date"]!
+            entry.cover = UIImage(data: imgData!)!
             entry.fileType = issue["type"]!
-            entry.webLocation = issue["contentUrl"]!
-            
-            print(entry.webLocation)
+            entry.webLocation = NSURL(string: issue["contentUrl"]!)!
             
         }
         
+        //attempt saving
         do {
             try context.save()
         } catch {
